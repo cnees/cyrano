@@ -1,1 +1,26 @@
-Welcome!
+<form id="words">
+  Find a word for <input id="synonym" type="text" required> that rhymes with <input id="rhyme" type="text" required>.
+  <button type="submit">Go</button>
+</form>
+<div id="results"></div>
+
+<script>
+  $(function() {
+    $("#words").submit(function(e) {
+      var synonym = $("#synonym").val();
+      var rhyme = $("#rhyme").val();
+      $.ajax({
+        url: '/',
+        type: 'get',
+        data: {syn:synonym, rhyme:rhyme},
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+      e.preventDefault(); // Don't load a new page
+    });
+  });
+</script>
