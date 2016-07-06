@@ -1,20 +1,21 @@
 <form id="words">
-  Find a word for <input id="synonym" type="text" required> that rhymes with <input id="rhyme" type="text" required>.
+  Find a word for <input id="word1" type="text" required> that rhymes with a word for <input id="word2" type="text" required>.
   <button type="submit">Go</button>
 </form>
-<div id="results"></div>
+<div id="results">Results</div>
 
 <script>
   $(function() {
     $("#words").submit(function(e) {
-      var synonym = $("#synonym").val();
-      var rhyme = $("#rhyme").val();
       $.ajax({
         url: '/',
         type: 'get',
-        data: {syn:synonym, rhyme:rhyme},
+        data: {
+          word1:$("#word1").val(),
+          word2:$("#word2").val()
+        },
         success: function(response) {
-          console.log(response);
+          $("#results").html(response);
         },
         error: function(err) {
           console.log(err);
